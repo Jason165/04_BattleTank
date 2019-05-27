@@ -2,7 +2,9 @@
 
 #include "TankAIController.h"
 #include "GameFramework/Actor.h"
-#include "AIController.h"
+#include "Tank.h"
+#include "BattleTank.h"
+//#include "AIController.h"
 
 void ATankAIController::BeginPlay()
 {
