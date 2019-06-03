@@ -17,11 +17,37 @@ ATank::ATank()
 	UE_LOG(LogTemp, Warning, TEXT("%s DONKEY: TANK C++ Construct"), *TankName)
 }
 
+<<<<<<< HEAD
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP Begin Play to run!
 	auto TankName = GetName();
 	UE_LOG(LogTemp, Warning, TEXT("%s DONKEY: TANK C++ Begin Play"), *TankName)
+=======
+void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
+{
+	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	Barrel = BarrelToSet;
+}
+
+void ATank::SetTurretReference(UTankTurret * TurretToSet)
+{
+	TankAimingComponent->SetTurretReference(TurretToSet);
+}
+
+// Called when the game starts or when spawned
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}
+
+// Called to bind functionality to input
+void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+>>>>>>> 27c0950701dc780e876b23ea03b0c34452f352d9
 }
 
 void ATank::AimAt(FVector HitLocation)
@@ -30,11 +56,20 @@ void ATank::AimAt(FVector HitLocation)
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 27c0950701dc780e876b23ea03b0c34452f352d9
 void ATank::Fire()
 {
 	if (!ensure(Barrel)) { return; }
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+<<<<<<< HEAD
 	if (isReloaded) {
+=======
+
+	if (Barrel && isReloaded) {
+>>>>>>> 27c0950701dc780e876b23ea03b0c34452f352d9
 
 		// spawn a projectile at the socket location on the barrel
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(

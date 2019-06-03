@@ -27,23 +27,24 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float Launchspeed)
 {
 	if (!ensure(Barrel)) { return; }
 
-	FVector OuLaunchVelocity(0);
+	FVector OutLaunchVelocity(0);
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
 	(
 		this,
-		OuLaunchVelocity,
+		OutLaunchVelocity,
 		StartLocation,
 		HitLocation,
 		Launchspeed,
 		false,
 		0,
 		0,
-		ESuggestProjVelocityTraceOption::DoNotTrace
+		ESuggestProjVelocityTraceOption::DoNotTrace // Paramater must be present to prevent bug
 	);
+
 	if (bHaveAimSolution)
 	{
-		auto AimDirection = OuLaunchVelocity.GetSafeNormal();
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
 	}
 	// if no solution found do nothing
